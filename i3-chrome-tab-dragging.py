@@ -10,12 +10,13 @@ last_new_window_title = ""
 # windows with these titles will never be converted to floating
 backlisted_window_titles = [
     "New Tab - Google Chrome",
+    "New Tab - Chromium",
 ]
 
 def on_window_new(i3, e): 
     global last_new_window_title
     
-    if e.container.window_class == "Google-chrome":
+    if e.container.window_class in ["Google-chrome", "Chromium-browser"]:
         # only switch to floating mode if the last window had the same name
         if last_new_window_title == e.container.window_title \
                 and e.container.window_title not in backlisted_window_titles:
