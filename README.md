@@ -28,7 +28,6 @@ exec_always --no-startup-id ~/.i3/i3-chrome-tab-dragging.py
 - The way this detects a "New Tab" from Chrome in a new window is based on the
   title string. If this changes in a future (or past) version. This will break
   and has to be expanded on.
-- Probably doesn't work for Chromium
 - Doesn't work for Firefox or other Browsers (feel free to open an PR if you
   have a solution)
 - Should there be an option to float instantly?
