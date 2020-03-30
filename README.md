@@ -20,6 +20,14 @@ exec_always --no-startup-id ~/.i3/i3-chrome-tab-dragging.py
 ```
 
 
+# Without and With
+Without `i3-chrome-tab-dragging.py`:
+![without](https://user-images.githubusercontent.com/16988672/77919224-300fdf80-729d-11ea-8c8a-c1c0c3f9c2fb.gif)
+
+With `i3-chrome-tab-dragging.py`:
+![with](https://user-images.githubusercontent.com/16988672/77919232-31d9a300-729d-11ea-8404-7623b5017615.gif)
+
+
 # Issues
 - I have no idea how I could detect a "tab dragging" before it opens a new i3
   window.
