@@ -7,16 +7,24 @@ from i3ipc import Connection, Event
 i3 = Connection()
 last_new_window_title = ""
 
+# list of browser classes
+browser_classes = [
+    "Google-chrome",
+    "Chromium-browser",
+    "Brave-browser",
+]
+
 # windows with these titles will never be converted to floating
 backlisted_window_titles = [
     "New Tab - Google Chrome",
     "New Tab - Chromium",
+    "New Tab - Brave",
 ]
 
 def on_window_new(i3, e): 
     global last_new_window_title
     
-    if e.container.window_class in ["Google-chrome", "Chromium-browser"]:
+    if e.container.window_class in browser_classes:
         # only switch to floating mode if the last window had the same name
         if last_new_window_title == e.container.window_title \
                 and e.container.window_title not in backlisted_window_titles:
