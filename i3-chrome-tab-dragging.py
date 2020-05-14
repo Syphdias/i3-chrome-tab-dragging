@@ -2,37 +2,53 @@
 # vi:expandtab tabstop=4
 # This is intended to be run when i3 starts it will exit on restart; make sure
 # to use "exec_always --no-startup-id" to run this
+from pynput.mouse import Listener, Button
 from i3ipc import Connection, Event
 
-i3 = Connection()
-last_new_window_title = ""
-
-# list of browser classes
+# Constants
 browser_classes = [
     "Google-chrome",
-    "Chromium-browser",
+    "Chromium",
     "Brave-browser",
 ]
 
-# windows with these titles will never be converted to floating
-backlisted_window_titles = [
-    "New Tab - Google Chrome",
-    "New Tab - Chromium",
-    "New Tab - Brave",
-]
+# Global Variables
+mousePressed = False
+currentWindow = None
 
-def on_window_new(i3, e): 
-    global last_new_window_title
-    
+# Called by mouse listener when the mouse is clicked
+def on_click(x, y, button, pressed):
+    global mousePressed
+    global currentWindow
+
+    # we want to store the status of the left mouse button
+    if button == Button.left:
+        mousePressed = pressed
+
+        # if the button is released and we were currently dragging a window, unfloat it
+        if not pressed and currentWindow:
+            currentWindow.command('floating disable')
+            currentWindow = None
+
+# Called by i3 when a new window is created
+def on_window_new(i3, e):
+    global currentWindow
+
+    # we only care about chromium windows
     if e.container.window_class in browser_classes:
-        # only switch to floating mode if the last window had the same name
-        if last_new_window_title == e.container.window_title \
-                and e.container.window_title not in backlisted_window_titles:
+        # only switch to floating mode if the user is currently dragging (=mouse button pressed)
+        if mousePressed:
             e.container.command('floating enable')
 
-        # save current title
-        last_new_window_title = e.container.window_title
+            # store the reference to the window, so we can unfloat it later
+            currentWindow = e.container
 
+##############
+# Main Logic #
+##############
+i3 = Connection()
+i3.on(Event.WINDOW_NEW, on_window_new)
 
-i3.on(Event.WINDOW_NEW, on_window_new) 
-i3.main()
+with Listener(on_click=on_click) as listener:
+    i3.main()
+
