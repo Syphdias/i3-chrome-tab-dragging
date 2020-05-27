@@ -1,3 +1,7 @@
+# Deprecation
+With version 83 chromium has changed the way tab dragging works. This makes this
+little tool unnecessary.
+
 # Description – What it does
 This script aims to solve a problem I have with dragging Chrome tabs while using
 the i3 window manager where it can be hard to place a second tab into another
