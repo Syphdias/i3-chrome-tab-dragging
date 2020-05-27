@@ -1,4 +1,4 @@
-# Deprecation
+# ⚠ Deprecation
 With version 83 chromium has changed the way tab dragging works. This makes this
 little tool unnecessary.
 
