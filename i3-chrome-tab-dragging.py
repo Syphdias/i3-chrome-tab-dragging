@@ -2,6 +2,7 @@
 # vi:expandtab tabstop=4
 # This is intended to be run when i3 starts it will exit on restart; make sure
 # to use "exec_always --no-startup-id" to run this
+from argparse import ArgumentParser
 from pynput.mouse import Listener, Button
 from i3ipc import Connection, Event
 
@@ -43,12 +44,19 @@ def on_window_new(i3, e):
             # store the reference to the window, so we can unfloat it later
             currentWindow = e.container
 
-##############
-# Main Logic #
-##############
-i3 = Connection()
-i3.on(Event.WINDOW_NEW, on_window_new)
 
-with Listener(on_click=on_click) as listener:
-    i3.main()
+def main(args):
+    i3 = Connection()
+    i3.on(Event.WINDOW_NEW, on_window_new)
 
+    with Listener(on_click=on_click) as listener:
+        i3.main()
+
+
+if __name__ == "__main__":
+    parser = ArgumentParser()
+
+    parser.add_argument("-v", "--verbose", action="count")
+    args = parser.parse_args()
+
+    main(args)
