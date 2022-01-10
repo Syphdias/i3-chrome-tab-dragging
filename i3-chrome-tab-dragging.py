@@ -14,35 +14,35 @@ browser_classes = [
 ]
 
 # Global Variables
-mousePressed = False
-currentWindow = None
+mouse_pressed = False
+current_window = None
 
 # Called by mouse listener when the mouse is clicked
 def on_click(x, y, button, pressed):
-    global mousePressed
-    global currentWindow
+    global mouse_pressed
+    global current_window
 
     # we want to store the status of the left mouse button
     if button == Button.left:
-        mousePressed = pressed
+        mouse_pressed = pressed
 
         # if the button is released and we were currently dragging a window, unfloat it
-        if not pressed and currentWindow:
-            currentWindow.command('floating disable')
-            currentWindow = None
+        if not pressed and current_window:
+            current_window.command('floating disable')
+            current_window = None
 
 # Called by i3 when a new window is created
 def on_window_new(i3, e):
-    global currentWindow
+    global current_window
 
     # we only care about chromium windows
     if e.container.window_class in browser_classes:
         # only switch to floating mode if the user is currently dragging (=mouse button pressed)
-        if mousePressed:
+        if mouse_pressed:
             e.container.command('floating enable')
 
             # store the reference to the window, so we can unfloat it later
-            currentWindow = e.container
+            current_window = e.container
 
 
 def main(args):
