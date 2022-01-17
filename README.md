@@ -2,6 +2,13 @@
 With version 83 chromium has changed the way tab dragging works. This makes this
 little tool unnecessary.
 
+Unfortunately dragging windows/tabs is broken again. I could track down the last
+working version to be 95.0.4629.0.
+- 95.0.4630.0+ is somewhat broken with dragging a tab to a new window being
+  broken but dragging back is possible.
+- ~97.0.4691.0+ breaks dragging majorly (see #4)
+- 98 or 99 is supposed to at least fix the major break
+
 # Description – What it does
 This script aims to solve a problem I have with dragging Chrome tabs while using
 the i3 window manager where it can be hard to place a second tab into another
