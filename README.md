@@ -1,13 +1,13 @@
-# ⚠ Deprecation
-With version 83 chromium has changed the way tab dragging works. This makes this
-little tool unnecessary.
+# Disclaimer
+There are versions for chromium/Google Chrome that work better than others.
+Here is a rough overview when this tool worked or was unnecessary:
 
-Unfortunately dragging windows/tabs is broken again. I could track down the last
-working version to be 95.0.4629.0.
-- 95.0.4630.0+ is somewhat broken with dragging a tab to a new window being
-  broken but dragging back is possible.
-- ~97.0.4691.0+ breaks dragging majorly (see #4)
-- 98 or 99 is supposed to at least fix the major break
+- pre 83.x: Dragging is not working flawlessly, this tool was born to work
+  around the issues
+- 83.x–95.0.4630.0: Perfect window dragging, no tool assist needed
+- 95.0.4630.0–97.0.4692.99: Major breakage in dragging, this tool cannot fix it
+- 97.0.4692.99+: Dragging works like pre 83.x again, tool can work again, but
+  it's not perfect
 
 # Description – What it does
 This script aims to solve a problem I have with dragging Chrome tabs while using
