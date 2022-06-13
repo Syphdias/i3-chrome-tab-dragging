@@ -1,4 +1,4 @@
-# Disclaimer
+# Disclaimer ⚠️
 There are versions for chromium/Google Chrome that work better than others.
 Here is a rough overview when this tool worked or was unnecessary:
 
@@ -8,6 +8,10 @@ Here is a rough overview when this tool worked or was unnecessary:
 - 95.0.4630.0–97.0.4692.99: Major breakage in dragging, this tool cannot fix it
 - 97.0.4692.99+: Dragging works like pre 83.x again, tool can work again, but
   it's not perfect
+- around 100: It broke again see Issues
+  [#5](https://github.com/Syphdias/i3-chrome-tab-dragging/issues/5) and
+  [#6](https://github.com/Syphdias/i3-chrome-tab-dragging/issues/6)
+- ~103: Works like pre 83.x again, tool can work again, but it's not perfect
 
 # Description – What it does
 This script aims to solve a problem I have with dragging Chrome tabs while using
