@@ -9,7 +9,10 @@ from i3ipc import Connection, Event
 # Constants
 browser_classes = [
     "Google-chrome",
+    "Google-chrome-beta",
+    "Google-chrome-unstable",
     "Chromium",
+    "Chromium-browser",
     "Brave-browser",
 ]
 
