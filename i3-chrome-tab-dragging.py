@@ -20,6 +20,7 @@ browser_classes = [
 mouse_pressed = False
 current_window = None
 
+
 # Called by mouse listener when the mouse is clicked
 def on_click(x, y, button, pressed):
     global mouse_pressed
@@ -27,12 +28,23 @@ def on_click(x, y, button, pressed):
 
     # we want to store the status of the left mouse button
     if button == Button.left:
+        if args.verbose:
+            if current_window:
+                print(
+                    f"{mouse_pressed=} {button=} {pressed=} "
+                    f"{current_window.name=}")
+            else:
+                print(
+                    f"None {mouse_pressed=} {button=} {pressed=}")
         mouse_pressed = pressed
 
         # if the button is released and we were currently dragging a window, unfloat it
         if not pressed and current_window:
+            if args.verbose:
+                print(f"Disable floating for {current_window.name}")
             current_window.command('floating disable')
             current_window = None
+
 
 # Called by i3 when a new window is created
 def on_window_new(i3, e):
@@ -40,26 +52,32 @@ def on_window_new(i3, e):
 
     # we only care about chromium windows
     if e.container.window_class in browser_classes:
+        if args.verbose:
+            print(f"New Window: {e.container.name=}")
         # only switch to floating mode if the user is currently dragging (=mouse button pressed)
         if mouse_pressed:
+            if args.verbose:
+                print(f"Enable floating for {e.container.name}")
             e.container.command('floating enable')
 
             # store the reference to the window, so we can unfloat it later
             current_window = e.container
+            if args.verbose:
+                print(f"Current Window is {current_window.name}")
 
 
 def main(args):
     i3 = Connection()
     i3.on(Event.WINDOW_NEW, on_window_new)
 
-    with Listener(on_click=on_click) as listener:
+    with Listener(on_click=on_click):
         i3.main()
 
 
 if __name__ == "__main__":
     parser = ArgumentParser()
 
-    parser.add_argument("-v", "--verbose", action="count")
+    parser.add_argument("-v", "--verbose", action="count", default=0)
     args = parser.parse_args()
 
     main(args)
