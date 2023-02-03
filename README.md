@@ -33,7 +33,8 @@ pip install --user -r requirements.txt
 exec_always --no-startup-id ~/.i3/i3-chrome-tab-dragging.py
 ```
 
-For Arch Linux, there is a package in the AUR: https://aur.archlinux.org/packages/python-i3-chrome-tab-dragging-git
+For Arch Linux, there is a package in the AUR (thanks, syyyr):<br>
+https://aur.archlinux.org/packages/python-i3-chrome-tab-dragging-git
 
 # Without and With
 Without `i3-chrome-tab-dragging.py`:
@@ -44,8 +45,8 @@ With `i3-chrome-tab-dragging.py`:
 
 
 # Issues
-currently none
- 
+None besides the ones mentioned in the [Disclaimer](#disclaimer-%EF%B8%8F) 😉.
+
 # Contributing
 You are very welcome to contribute by PR or Issue to report wishes or bugs.
 Please honor PEP-8 if you open a PR, but don't worry if you don't know it, I
