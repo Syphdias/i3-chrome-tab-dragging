@@ -30,12 +30,9 @@ def on_click(x, y, button, pressed):
     if button == Button.left:
         if args.verbose:
             if current_window:
-                print(
-                    f"{mouse_pressed=} {button=} {pressed=} "
-                    f"{current_window.name=}")
+                print(f"{mouse_pressed=} {button=} {pressed=} {current_window.name=}")
             else:
-                print(
-                    f"None {mouse_pressed=} {button=} {pressed=}")
+                print(f"None {mouse_pressed=} {button=} {pressed=}")
         mouse_pressed = pressed
 
         # if the button is released and we were currently dragging a window, unfloat it
@@ -58,7 +55,7 @@ def on_window_new(i3, e):
         if mouse_pressed:
             if args.verbose:
                 print(f"Enable floating for {e.container.name}")
-            e.container.command('floating enable')
+            e.container.command("floating enable")
 
             # store the reference to the window, so we can unfloat it later
             current_window = e.container
